@@ -4,19 +4,13 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float _speed = 3f;
-    [SerializeField] private Transform _path;
-
-    private Transform[] _points;
+    [SerializeField] private Transform[] _points;
+    
     private int _currentPointIndex;
     private Transform _currentTarget;
 
     private void Awake()
     {
-        _points = new Transform[_path.childCount];
-
-        for (int i = 0; i < _path.childCount; i++)
-            _points[i] = _path.GetChild(i);
-
         _currentPointIndex = 0;
         _currentTarget = _points[_currentPointIndex];
     }
@@ -39,8 +33,10 @@ public class EnemyMover : MonoBehaviour
 
     private void TryFlip()
     {
+        float leftRotation = -180f;
+        
         if (transform.position.x > _currentTarget.position.x)
-            transform.rotation = Quaternion.Euler(0, -180f, 0);
+            transform.rotation = Quaternion.Euler(0, -leftRotation, 0);
         else
             transform.rotation = Quaternion.Euler(Vector3.zero);
     }
@@ -60,6 +56,10 @@ public class EnemyMover : MonoBehaviour
         _currentTarget = _points[_currentPointIndex];
     }
 
-    private bool IsOnPoint() =>
-        (transform.position - _currentTarget.position).magnitude < 1f;
+    private bool IsOnPoint()
+    {
+        float epsilon = 1f;
+        
+        return (transform.position - _currentTarget.position).sqrMagnitude < epsilon;
+    }
 }

@@ -412,6 +412,18 @@ PrefabInstance:
       propertyPath: _path
       value: 
       objectReference: {fileID: 1235008072}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.data[0]
+      value: 
+      objectReference: {fileID: 1254085321}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.data[1]
+      value: 
+      objectReference: {fileID: 713066337}
     - target: {fileID: 5251910634295365766, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 97.59662
@@ -500,6 +512,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5304898401917900122, guid: 2f1c46f6976ade449846362c38bc3538, type: 3}
   m_PrefabInstance: {fileID: 2078016561864976034}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &496826324 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5251910634295365766, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+  m_PrefabInstance: {fileID: 972271794}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &513969851
 GameObject:
@@ -812,7 +829,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 755333187}
-  - component: {fileID: 755333189}
   - component: {fileID: 755333188}
   m_Layer: 0
   m_Name: CoinSpawner
@@ -880,20 +896,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabf9c8a84127174fbabcd23b9949879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPoints: []
+  _spawnPoints:
+  - {fileID: 801005606}
+  - {fileID: 1433489160}
+  - {fileID: 1064453358}
+  - {fileID: 960116946}
+  - {fileID: 1974595741}
+  - {fileID: 1493597682}
+  - {fileID: 417580463}
+  - {fileID: 172544507}
+  - {fileID: 7704001}
+  - {fileID: 853438285}
+  - {fileID: 1461232690}
+  - {fileID: 1722651488}
+  - {fileID: 871382331}
+  - {fileID: 1697645181}
+  - {fileID: 1434230533}
+  - {fileID: 1053653180}
+  - {fileID: 855412038}
+  - {fileID: 941693869}
+  - {fileID: 160193245}
+  - {fileID: 1502258944}
+  - {fileID: 513969852}
+  - {fileID: 1958257806}
+  - {fileID: 219916708}
+  - {fileID: 751658069}
+  - {fileID: 1972628582}
+  - {fileID: 1026072140}
+  - {fileID: 1221404482}
+  - {fileID: 17502595}
+  - {fileID: 1468263950}
+  - {fileID: 2018621492}
+  - {fileID: 1115779532}
+  - {fileID: 1442843605}
   _coinPrefab: {fileID: 8957199428545755190, guid: bf9a0d5fb7a8bd541bd0868eef0d6911, type: 3}
---- !u!114 &755333189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 755333186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33375ed3964f0d548825b5bde4a2165b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &801005605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,6 +1128,22 @@ PrefabInstance:
       propertyPath: _path
       value: 
       objectReference: {fileID: 1975541216}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.data[0]
+      value: 
+      objectReference: {fileID: 1097086840}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.data[1]
+      value: 
+      objectReference: {fileID: 4163018}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.data[2]
+      value: 
+      objectReference: {fileID: 496826324}
     - target: {fileID: 5251910634295365766, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 126.26
@@ -122521,6 +122573,18 @@ PrefabInstance:
       propertyPath: _path
       value: 
       objectReference: {fileID: 145711469}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.data[0]
+      value: 
+      objectReference: {fileID: 1364601796}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.data[1]
+      value: 
+      objectReference: {fileID: 603034350}
     - target: {fileID: 5251910634295365766, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 34.59
@@ -122873,6 +122937,18 @@ PrefabInstance:
       propertyPath: _path
       value: 
       objectReference: {fileID: 1728683924}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.data[0]
+      value: 
+      objectReference: {fileID: 617457969}
+    - target: {fileID: 3184832265019676560, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
+      propertyPath: _points.Array.data[1]
+      value: 
+      objectReference: {fileID: 1393834025}
     - target: {fileID: 5251910634295365766, guid: 7e68539a011e0af4981de2e5c380eea7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 68.7606

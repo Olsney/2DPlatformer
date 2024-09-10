@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Coin))]
 public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
@@ -11,8 +10,6 @@ public class CoinSpawner : MonoBehaviour
 
     private void Awake()
     {
-        _spawnPoints = GetComponentsInChildren<Transform>();
-
         Spawn();
     }
 

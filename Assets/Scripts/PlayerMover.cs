@@ -1,44 +1,47 @@
+using Services.InputServices;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMover : MonoBehaviour
 {
-    private const string Horizontal = "Horizontal";
 
     [SerializeField] private float _speed = 7f;
     [SerializeField] private float _jumpForce = 4f;
     [SerializeField] private GroundChecker _groundChecker;
     [SerializeField] private Animator _animator;
+    
 
     private Rigidbody2D _rigidbody;
     private float _directionX;
     private float _velocity;
+    private IInputService _inputService;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _inputService = new StandaloneInputService();
     }
 
-    private void Update()
+    public void Move()
     {
-        _directionX = Input.GetAxis(Horizontal);
+        _rigidbody.velocity = new Vector2(_directionX * _speed, _rigidbody.velocity.y);
+    }
+
+    public void CalculateDirection()
+    {
+        _directionX = _inputService.DirectionX;
         _velocity = Mathf.Abs(_rigidbody.velocity.x);
 
-        _animator.SetFloat(AnimatorData.Speed, _velocity);
-        _animator.SetBool(AnimatorData.IsGrounded, _groundChecker.IsGrounded);
+        _animator.SetFloat(AnimatorData.PlayerData.Speed, _velocity);
+        _animator.SetBool(AnimatorData.PlayerData.IsGrounded, _groundChecker.IsGrounded);
         
-            TryFlip();
+        TryFlip();
 
         if (TryJump())
         {
             Jump();
-            _animator.SetBool(AnimatorData.IsGrounded, _groundChecker.IsGrounded);
+            _animator.SetBool(AnimatorData.PlayerData.IsGrounded, _groundChecker.IsGrounded);
         }
-    }
-
-    private void FixedUpdate()
-    {
-        _rigidbody.velocity = new Vector2(_directionX * _speed, _rigidbody.velocity.y);
     }
 
     private void Jump()
@@ -67,5 +70,5 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private bool TryJump() =>
-        Input.GetKeyDown(KeyCode.Space) && _groundChecker.IsGrounded;
+        _inputService.IsJumping && _groundChecker.IsGrounded;
 }
