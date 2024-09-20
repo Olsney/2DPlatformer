@@ -1,16 +1,17 @@
+using System.Collections;
+using Animators;
 using Services.InputServices;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
-
     [SerializeField] private float _speed = 7f;
     [SerializeField] private float _jumpForce = 4f;
     [SerializeField] private GroundChecker _groundChecker;
-    [SerializeField] private Animator _animator;
+    // [SerializeField] private Animator _animator;
+    [SerializeField] private PlayerAnimator _playerAnimator;
     
-
     private Rigidbody2D _rigidbody;
     private float _directionX;
     private float _velocity;
@@ -32,15 +33,18 @@ public class PlayerMover : MonoBehaviour
         _directionX = _inputService.DirectionX;
         _velocity = Mathf.Abs(_rigidbody.velocity.x);
 
-        _animator.SetFloat(AnimatorData.PlayerData.Speed, _velocity);
-        _animator.SetBool(AnimatorData.PlayerData.IsGrounded, _groundChecker.IsGrounded);
+        _playerAnimator.PlayMove(_velocity);
+        _playerAnimator.TryPlayJump(_groundChecker.IsGrounded);
+        // _animator.SetFloat(AnimatorData.PlayerData.Speed, _velocity);
+        // _animator.SetBool(AnimatorData.PlayerData.IsGrounded, _groundChecker.IsGrounded);
         
         TryFlip();
 
         if (TryJump())
         {
             Jump();
-            _animator.SetBool(AnimatorData.PlayerData.IsGrounded, _groundChecker.IsGrounded);
+            _playerAnimator.TryPlayJump(_groundChecker.IsGrounded);
+            // _animator.SetBool(AnimatorData.PlayerData.IsGrounded, _groundChecker.IsGrounded);
         }
     }
 
