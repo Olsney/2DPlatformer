@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1915830352410592680}
+  - component: {fileID: 9204985655835234682}
+  - component: {fileID: 7835584061646169972}
   m_Layer: 7
   m_Name: AttackChecker
   m_TagString: Untagged
@@ -31,6 +33,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5251910634295365766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &9204985655835234682
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6104438083793702651}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2
+--- !u!114 &7835584061646169972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6104438083793702651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a252831b4d82d443ada6eedc93a0702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _checkRadius: 1
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8534004845541873814
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,6 +99,7 @@ GameObject:
   - component: {fileID: 2164388706475064598}
   - component: {fileID: 3184832265019676560}
   - component: {fileID: 6761954843480863676}
+  - component: {fileID: 6869158181604154917}
   m_Layer: 7
   m_Name: Bear Enemy
   m_TagString: Untagged
@@ -234,6 +288,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerChecker: {fileID: 3621777809880732310}
+  _attackChecker: {fileID: 7835584061646169972}
+  _animator: {fileID: 6869158181604154917}
+  _config: {fileID: 11400000, guid: 021388edad168154a9b63f02f333dac7, type: 2}
+--- !u!114 &6869158181604154917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8534004845541873814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b2153060214839bd3603358fdb8a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 8874719320750499952}
 --- !u!1 &8812019500694464146
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,4 +387,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4

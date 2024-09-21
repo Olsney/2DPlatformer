@@ -189,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 9100751499283651569}
   _enemyChecker: {fileID: 6314716740377519911}
+  _config: {fileID: 11400000, guid: 01ec8baa530d3aa4da932de7af8e8f67, type: 2}
 --- !u!114 &8984900531965678440
 MonoBehaviour:
   m_ObjectHideFlags: 0
