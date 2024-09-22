@@ -6,9 +6,6 @@ namespace World.Characters.Enemies.Systems
 {
     public class AttackAbility : MonoBehaviour
     {
-        [SerializeField] private float _checkRadius = 1f;
-        [SerializeField] private LayerMask _layerMask;
-
         public event Action<Player> Founded;
         public event Action Lost;
 

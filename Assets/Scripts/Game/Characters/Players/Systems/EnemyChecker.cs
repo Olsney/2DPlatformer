@@ -6,9 +6,6 @@ namespace World.Characters.Players.Systems
 {
     public class EnemyChecker : MonoBehaviour
     {
-        [SerializeField] private float _checkRadius = 1f;
-        [SerializeField] private LayerMask _layerMask;
-
         private Enemy _currentEnemy;
 
         private bool _isEnemyFounded;
