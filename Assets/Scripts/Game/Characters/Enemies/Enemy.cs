@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using World.Characters.Enemies.Animators;
 using World.Characters.Enemies.Configs;
 using World.Characters.Enemies.Systems;
@@ -8,47 +7,38 @@ using World.Characters.Interfaces;
 
 namespace World.Characters.Enemies
 {
-    public class Enemy : MonoBehaviour, IAttacker, IDamageable
+    public class Enemy : MonoBehaviour, IAttacker, IDamageable, IInitializable
     {
-        [FormerlySerializedAs("_playerChecker")] [SerializeField] private PlayerFinder playerFinder;
-        [FormerlySerializedAs("_attackChecker")] [SerializeField] private AttackAbility attackAbility;
+        [SerializeField] private PlayerFinder _playerFinder;
+        [SerializeField] private AttackAbility _attackAbility;
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private EnemyConfig _config;
+        [SerializeField] private EnemyMover _mover;
 
         private int _health;
-        private EnemyMover _mover;
         private Coroutine _currentCoroutine;
 
         public void Init()
         {
-            _mover = GetComponent<EnemyMover>();
             _mover.Init();
-
+        
             _health = _config.MaxHealth;
         }
 
-        // private void Awake()
-        // {
-        //     _mover = GetComponent<EnemyMover>();
-        //     _mover.Init();
-        //
-        //     _health = _config.MaxHealth;
-        // }
-
         private void OnEnable()
         {
-            playerFinder.Found += _mover.MoveTo;
-            playerFinder.Lost += _mover.MoveToPoint;
-            attackAbility.Founded += Attack;
-            attackAbility.Lost += StopAttack;
+            _playerFinder.Found += _mover.MoveToPlayer;
+            _playerFinder.Lost += _mover.MoveToPoint;
+            _attackAbility.Founded += Attack;
+            _attackAbility.Lost += StopAttack;
         }
 
         private void OnDisable()
         {
-            playerFinder.Found -= _mover.MoveTo;
-            playerFinder.Lost -= _mover.MoveToPoint;
-            attackAbility.Founded -= Attack;
-            attackAbility.Lost -= StopAttack;
+            _playerFinder.Found -= _mover.MoveToPlayer;
+            _playerFinder.Lost -= _mover.MoveToPoint;
+            _attackAbility.Founded -= Attack;
+            _attackAbility.Lost -= StopAttack;
         }
     
         public void Attack(IDamageable player)

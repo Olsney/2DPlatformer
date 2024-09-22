@@ -11,7 +11,7 @@ using World.Environment;
 namespace World.Characters.Players
 {
     [RequireComponent(typeof(PlayerMover), typeof(Rigidbody2D))]
-    public class Player : MonoBehaviour, IAttacker, IDamageable, IHealeable, IEnemyTarget
+    public class Player : MonoBehaviour, IAttacker, IDamageable, IHealeable, IEnemyTarget, IInitializable
     {
         [SerializeField] private PlayerAnimator _animator;
         [SerializeField] private EnemyChecker _enemyChecker;
@@ -31,14 +31,6 @@ namespace World.Characters.Players
             _rigidbody = GetComponent<Rigidbody2D>();
             _mover.Init(_rigidbody);
         }
-
-        // private void Awake()
-        // {
-        //     _mover = GetComponent<PlayerMover>();
-        //     _health = _config.MaxHealth;
-        //     _rigidbody = GetComponent<Rigidbody2D>();
-        //     _mover.Init(_rigidbody);
-        // }
 
         private void Update()
         {
@@ -77,17 +69,6 @@ namespace World.Characters.Players
 
         public void Attack(IDamageable enemy)
         {
-            //У энеми такой же метод атаки и получения урона. Можно ли вынести в класс Attacker и Damagable с базовой реализацией,
-            //которые будут наследовать интерфейсы и просто прокинуть их сюда?
-            //Или это норм так как уже есть интерфейсы? Тогда просто тут и у врага получится
-            //_attacker.Attack(enemy) и _damageable.TakeDamage(damage)
-
-            // if (_enemyChecker.TryGetEnemy(out enemy) == false)
-            //     return;
-
-            // enemy.TakeDamage(_config.Damage);
-            // _animator.Attack();
-
             if (_attackCoroutine != null)
                 return;
 

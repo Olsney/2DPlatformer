@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9204985655835234682}
   - component: {fileID: 7835584061646169972}
   m_Layer: 7
-  m_Name: AttackChecker
+  m_Name: AttackAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,10 +287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1048ef35bbb05124b96161a14fc62037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerChecker: {fileID: 3621777809880732310}
-  _attackChecker: {fileID: 7835584061646169972}
+  _playerFinder: {fileID: 3621777809880732310}
+  _attackAbility: {fileID: 7835584061646169972}
   _animator: {fileID: 6869158181604154917}
   _config: {fileID: 11400000, guid: 021388edad168154a9b63f02f333dac7, type: 2}
+  _mover: {fileID: 3184832265019676560}
 --- !u!114 &6869158181604154917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +317,7 @@ GameObject:
   - component: {fileID: 3621777809880732310}
   - component: {fileID: 4293830799038718467}
   m_Layer: 7
-  m_Name: PlayerChecker
+  m_Name: PlayerFinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,10 +350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9529a82855a2599478df8ceeacd2072c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _checkRadius: 3
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!58 &4293830799038718467
 CircleCollider2D:
   m_ObjectHideFlags: 0

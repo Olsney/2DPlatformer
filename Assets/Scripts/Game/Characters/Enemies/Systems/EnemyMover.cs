@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using World.Characters.Interfaces;
 
 namespace World.Characters.Enemies.Systems
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class EnemyMover : MonoBehaviour
+    public class EnemyMover : MonoBehaviour, IInitializable
     {
         [SerializeField] private float _speed = 3f;
         [SerializeField] private Transform[] _points;
@@ -24,7 +25,7 @@ namespace World.Characters.Enemies.Systems
             TryFlip(_currentTarget);
         }
 
-        public void MoveTo(Transform playerTransform)
+        public void MoveToPlayer(Transform playerTransform)
         {
             if (_currentCoroutine != null)
             {
