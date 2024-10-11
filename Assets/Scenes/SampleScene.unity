@@ -1405,40 +1405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabf9c8a84127174fbabcd23b9949879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPoints:
-  - {fileID: 801005606}
-  - {fileID: 1433489160}
-  - {fileID: 1064453358}
-  - {fileID: 960116946}
-  - {fileID: 1974595741}
-  - {fileID: 1493597682}
-  - {fileID: 417580463}
-  - {fileID: 172544507}
-  - {fileID: 7704001}
-  - {fileID: 853438285}
-  - {fileID: 1461232690}
-  - {fileID: 1722651488}
-  - {fileID: 871382331}
-  - {fileID: 1697645181}
-  - {fileID: 1434230533}
-  - {fileID: 1053653180}
-  - {fileID: 855412038}
-  - {fileID: 941693869}
-  - {fileID: 160193245}
-  - {fileID: 1502258944}
-  - {fileID: 513969852}
-  - {fileID: 1958257806}
-  - {fileID: 219916708}
-  - {fileID: 751658069}
-  - {fileID: 1972628582}
-  - {fileID: 1026072140}
-  - {fileID: 1221404482}
-  - {fileID: 17502595}
-  - {fileID: 1468263950}
-  - {fileID: 2018621492}
-  - {fileID: 1115779532}
-  - {fileID: 1442843605}
-  _coinPrefab: {fileID: 8957199428545755190, guid: bf9a0d5fb7a8bd541bd0868eef0d6911, type: 3}
+  _spawnPoints: []
+  _coinPrefab: {fileID: 0}
 --- !u!1 &794517649 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6985817885119255628, guid: 2f1c46f6976ade449846362c38bc3538, type: 3}
@@ -123855,6 +123823,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 755333187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1718872529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1718872531}
+  - component: {fileID: 1718872530}
+  m_Layer: 0
+  m_Name: HealthPresenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1718872530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718872529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf03359fb74a2454ab69f8820d72a70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthModel: {fileID: 2024271118}
+  _healthView: []
+--- !u!4 &1718872531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718872529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 36.09334, y: -1.5599335, z: 3.0754418}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1722651487
 GameObject:
   m_ObjectHideFlags: 0
@@ -124260,6 +124274,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7747360850904178581, guid: 893e9a24d63a9594992bff0febb94e31, type: 3}
   m_PrefabInstance: {fileID: 1896822196267332395}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2024271117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2024271119}
+  - component: {fileID: 2024271118}
+  m_Layer: 0
+  m_Name: HealthModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2024271118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024271117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94dfdec35b71d2b4b98ee6014c8ace32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxValue: 200
+--- !u!4 &2024271119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024271117}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.42978, y: -0.7767551, z: 3.0754418}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2055948746
 GameObject:
   m_ObjectHideFlags: 0
@@ -124295,6 +124354,7 @@ MonoBehaviour:
   - {fileID: 1696267450}
   - {fileID: 1974646388}
   - {fileID: 1971586934}
+  _healthPresenter: {fileID: 0}
 --- !u!4 &2055948748
 Transform:
   m_ObjectHideFlags: 0
@@ -124590,6 +124650,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7760262844722283134, guid: 2f1c46f6976ade449846362c38bc3538, type: 3}
+      propertyPath: _healthModel
+      value: 
+      objectReference: {fileID: 2024271118}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -124683,3 +124747,5 @@ SceneRoots:
   - {fileID: 755333187}
   - {fileID: 73501206}
   - {fileID: 2055948748}
+  - {fileID: 2024271119}
+  - {fileID: 1718872531}

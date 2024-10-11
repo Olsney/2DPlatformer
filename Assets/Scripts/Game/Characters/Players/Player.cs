@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using World.Characters.Interfaces;
 using World.Characters.Players.Animators;
 using World.Characters.Players.Configs;
@@ -11,14 +12,16 @@ using World.Environment;
 namespace World.Characters.Players
 {
     [RequireComponent(typeof(PlayerMover), typeof(Rigidbody2D))]
-    public class Player : MonoBehaviour, IAttacker, IDamageable, IHealeable, IEnemyTarget, IInitializable
+    public class Player : MonoBehaviour, IAttacker, IDamageable, IHealeable, IEnemyTarget
     {
         [SerializeField] private PlayerAnimator _animator;
         [SerializeField] private EnemyChecker _enemyChecker;
         [SerializeField] private PlayerConfig _config;
 
+        [SerializeField] private HealthModel _healthModel;
+
         private PlayerMover _mover;
-        private int _health;
+        // private int _health;
         private Coroutine _attackCoroutine;
         private Rigidbody2D _rigidbody;
 
@@ -27,9 +30,13 @@ namespace World.Characters.Players
         public void Init()
         {
             _mover = GetComponent<PlayerMover>();
-            _health = _config.MaxHealth;
+            // _health = _config.MaxHealth;
+            // Получается, плеерконфиг и энеми конфиг не нужны? Или то, что там только урон, нормально?
             _rigidbody = GetComponent<Rigidbody2D>();
             _mover.Init(_rigidbody);
+            _healthModel.Init();
+
+            Debug.Log(_healthModel.Value);
         }
 
         private void Update()
@@ -89,17 +96,31 @@ namespace World.Characters.Players
             }
         }
 
+        // public void TakeDamage(int damage)
+        // {
+        //     if (damage < 0)
+        //         damage = 0;
+        //
+        //     _health -= damage;
+        //
+        //     Debug.Log($"Игрок получил урон.");
+        //     Debug.Log($"Здоровье игрока: {_health}");
+        //
+        //     if (_health <= 0)
+        //     {
+        //         Debug.Log("Игрок погиб");
+        //
+        //         Destroy(gameObject);
+        //
+        //         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //     }
+        // }
+
         public void TakeDamage(int damage)
         {
-            if (damage < 0)
-                damage = 0;
+            _healthModel.TakeDamage(damage);
 
-            _health -= damage;
-
-            Debug.Log($"Игрок получил урон.");
-            Debug.Log($"Здоровье игрока: {_health}");
-
-            if (_health <= 0)
+            if (_healthModel.Value <= 0)
             {
                 Debug.Log("Игрок погиб");
 
@@ -109,22 +130,7 @@ namespace World.Characters.Players
             }
         }
 
-        public void TakeHeal(int heal)
-        {
-            if (heal < 0)
-                throw new Exception("Лечение не может быть отрицательным");
-
-            _health += heal;
-
-            ClampHealth();
-
-            Debug.Log($"Пополнили здоровье. Текущее здоровье: {_health}");
-        }
-
-        private void ClampHealth()
-        {
-            if (_health > _config.MaxHealth)
-                _health = _config.MaxHealth;
-        }
+        public void TakeHeal(int heal) => 
+            _healthModel.TakeHeal(heal);
     }
 }

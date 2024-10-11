@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using Game.UI;
+using UnityEngine;
 using World.Characters.Enemies;
 using World.Characters.Players;
-using IInitializable = World.Characters.Interfaces.IInitializable;
 
 namespace Game
 {
@@ -9,13 +9,13 @@ namespace Game
     {
         [SerializeField] private Player _player;
         [SerializeField] private Enemy[] _enemies;
-        [SerializeField] private IInitializable[] _initializables;
+        [SerializeField] private HealthPresenter _healthPresenter;
         
         public void Awake()
         {
             InitEnemies();
-            
             _player.Init();
+            // _healthPresenter.Init();
         }
         
         private void InitEnemies()

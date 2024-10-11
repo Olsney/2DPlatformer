@@ -7,9 +7,9 @@ namespace World.Environment
     {
         [SerializeField] private HealingKitConfig _config;
         
-        public void Heal(IHealeable player)
+        public void Heal(IHealeable unit)
         {
-            player.TakeHeal(_config.HealthToHeal);
+            unit.TakeHeal(_config.HealthToHeal);
         }
     }
 }

@@ -7,7 +7,7 @@ using World.Characters.Interfaces;
 
 namespace World.Characters.Enemies
 {
-    public class Enemy : MonoBehaviour, IAttacker, IDamageable, IInitializable
+    public class Enemy : MonoBehaviour, IAttacker, IDamageable
     {
         [SerializeField] private PlayerFinder _playerFinder;
         [SerializeField] private AttackAbility _attackAbility;

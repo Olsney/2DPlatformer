@@ -5,7 +5,7 @@ using World.Characters.Interfaces;
 namespace World.Characters.Enemies.Systems
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class EnemyMover : MonoBehaviour, IInitializable
+    public class EnemyMover : MonoBehaviour
     {
         [SerializeField] private float _speed = 3f;
         [SerializeField] private Transform[] _points;
@@ -18,10 +18,6 @@ namespace World.Characters.Enemies.Systems
         {
             _currentPointIndex = 0;
             _currentTarget = _points[_currentPointIndex];
-        }
-
-        private void Start()
-        {
             TryFlip(_currentTarget);
         }
 
