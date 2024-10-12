@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4774260717305209904}
   - component: {fileID: 1453122489782230596}
   m_Layer: 5
-  m_Name: SlowHealthbar
+  m_Name: SmoothHealthbarSlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -875,7 +875,7 @@ Canvas:
   m_GameObject: {fileID: 8459291896859433120}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -941,7 +941,7 @@ GameObject:
   - component: {fileID: 409261369567028759}
   - component: {fileID: 6414833608723894196}
   m_Layer: 5
-  m_Name: MainHealthbar
+  m_Name: SmoothHealthbarMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
