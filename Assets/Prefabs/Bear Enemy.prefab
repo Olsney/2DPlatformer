@@ -80,10 +80,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a252831b4d82d443ada6eedc93a0702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _checkRadius: 1
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &8534004845541873814
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,6 +96,8 @@ GameObject:
   - component: {fileID: 3184832265019676560}
   - component: {fileID: 6761954843480863676}
   - component: {fileID: 6869158181604154917}
+  - component: {fileID: 2099245331353034045}
+  - component: {fileID: 8931002257579666099}
   m_Layer: 7
   m_Name: Bear Enemy
   m_TagString: Untagged
@@ -292,6 +290,8 @@ MonoBehaviour:
   _animator: {fileID: 6869158181604154917}
   _config: {fileID: 11400000, guid: 021388edad168154a9b63f02f333dac7, type: 2}
   _mover: {fileID: 3184832265019676560}
+  _healthModel: {fileID: 2099245331353034045}
+  _healthPresenter: {fileID: 8931002257579666099}
 --- !u!114 &6869158181604154917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +305,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8874719320750499952}
+--- !u!114 &2099245331353034045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8534004845541873814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94dfdec35b71d2b4b98ee6014c8ace32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxValue: 0
+--- !u!114 &8931002257579666099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8534004845541873814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551fd0e2bcbda494ea8a2fec5d4dcc98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthModel: {fileID: 2099245331353034045}
+  _healthView: []
 --- !u!1 &8812019500694464146
 GameObject:
   m_ObjectHideFlags: 0

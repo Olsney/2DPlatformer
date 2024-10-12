@@ -11,8 +11,9 @@ public class HealthModel : MonoBehaviour
     public int Value { get; private set; }
     public int MaxValue => _maxValue;
     
-    public void Init()
+    public void Init(int maxHealth)
     {
+        _maxValue = maxHealth;
         Value = _maxValue;
     }
     

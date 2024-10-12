@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
+using Game.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using World.Characters.Interfaces;
 using World.Characters.Players.Animators;
 using World.Characters.Players.Configs;
@@ -17,11 +16,10 @@ namespace World.Characters.Players
         [SerializeField] private PlayerAnimator _animator;
         [SerializeField] private EnemyChecker _enemyChecker;
         [SerializeField] private PlayerConfig _config;
-
         [SerializeField] private HealthModel _healthModel;
+        [SerializeField] private HealthPresenter _healthPresenter;
 
         private PlayerMover _mover;
-        // private int _health;
         private Coroutine _attackCoroutine;
         private Rigidbody2D _rigidbody;
 
@@ -30,11 +28,10 @@ namespace World.Characters.Players
         public void Init()
         {
             _mover = GetComponent<PlayerMover>();
-            // _health = _config.MaxHealth;
-            // Получается, плеерконфиг и энеми конфиг не нужны? Или то, что там только урон, нормально?
             _rigidbody = GetComponent<Rigidbody2D>();
             _mover.Init(_rigidbody);
-            _healthModel.Init();
+            _healthModel.Init(_config.MaxHealth);
+            _healthPresenter.Init();
 
             Debug.Log(_healthModel.Value);
         }
@@ -95,26 +92,6 @@ namespace World.Characters.Players
                 yield return wait;
             }
         }
-
-        // public void TakeDamage(int damage)
-        // {
-        //     if (damage < 0)
-        //         damage = 0;
-        //
-        //     _health -= damage;
-        //
-        //     Debug.Log($"Игрок получил урон.");
-        //     Debug.Log($"Здоровье игрока: {_health}");
-        //
-        //     if (_health <= 0)
-        //     {
-        //         Debug.Log("Игрок погиб");
-        //
-        //         Destroy(gameObject);
-        //
-        //         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //     }
-        // }
 
         public void TakeDamage(int damage)
         {

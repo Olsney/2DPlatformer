@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.UI;
 using UnityEngine;
 using World.Characters.Enemies.Animators;
 using World.Characters.Enemies.Configs;
@@ -14,17 +15,18 @@ namespace World.Characters.Enemies
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private EnemyConfig _config;
         [SerializeField] private EnemyMover _mover;
+        [SerializeField] private HealthModel _healthModel;
+        [SerializeField] private HealthPresenter _healthPresenter;
 
-        private int _health;
         private Coroutine _currentCoroutine;
 
         public void Init()
         {
             _mover.Init();
-        
-            _health = _config.MaxHealth;
-        }
 
+            _healthModel.Init(_config.MaxHealth);
+            _healthPresenter.Init();
+        }
         private void OnEnable()
         {
             _playerFinder.Found += _mover.MoveToPlayer;
@@ -76,15 +78,9 @@ namespace World.Characters.Enemies
 
         public void TakeDamage(int damage)
         {
-            if (damage < 0)
-                damage = 0;
-
-            _health -= damage;
+            _healthModel.TakeDamage(damage);
         
-            Debug.Log($"Враг получил урон.");
-            Debug.Log($"Здоровье врага: {_health}");
-        
-            if (_health <= 0)
+            if (_healthModel.Value <= 0)
             {
                 Debug.Log("Враг умер");
             

@@ -15,7 +15,7 @@ namespace Game
         {
             InitEnemies();
             _player.Init();
-            // _healthPresenter.Init();
+            _healthPresenter.Init();
         }
         
         private void InitEnemies()
