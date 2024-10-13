@@ -21,7 +21,7 @@ namespace World.Characters.Enemies.Systems
             TryFlip(_currentTarget);
         }
 
-        public void MoveToPlayer(Transform playerTransform)
+        public void MoveToPlayer(IEnemyTarget player)
         {
             if (_currentCoroutine != null)
             {
@@ -29,7 +29,7 @@ namespace World.Characters.Enemies.Systems
                 _currentCoroutine = null;
             }
 
-            _currentCoroutine = StartCoroutine(MoveToPlayerJob(playerTransform));
+            _currentCoroutine = StartCoroutine(MoveToPlayerJob(player.Transform));
         }
 
         public void TryFlip(Transform followedTransform)

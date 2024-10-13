@@ -25,12 +25,13 @@ namespace World.Characters.Enemies
             _mover.Init();
             _healthModel.Init(_config.MaxHealth);
             _healthPresenter.Init();
+            _mover.MoveToPoint();
         }
         private void OnEnable()
         {
             _playerFinder.Found += _mover.MoveToPlayer;
             _playerFinder.Lost += _mover.MoveToPoint;
-            _attackAbility.Founded += Attack;
+            _attackAbility.Found += Attack;
             _attackAbility.Lost += StopAttack;
         }
 
@@ -38,7 +39,7 @@ namespace World.Characters.Enemies
         {
             _playerFinder.Found -= _mover.MoveToPlayer;
             _playerFinder.Lost -= _mover.MoveToPoint;
-            _attackAbility.Founded -= Attack;
+            _attackAbility.Found -= Attack;
             _attackAbility.Lost -= StopAttack;
         }
     
