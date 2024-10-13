@@ -93,7 +93,6 @@ namespace World.Characters.Enemies.Systems
         {
             while (enabled)
             {
-
                 if (playerTransform == null)
                     yield return null;
 

@@ -10,8 +10,6 @@ namespace World.Characters.Enemies.Systems
         public event Action<Transform> Found;
         public event Action Lost;
         
-        private Player _player;
-
         private void Start()
         {
             Lost?.Invoke();

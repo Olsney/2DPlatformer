@@ -23,7 +23,6 @@ namespace World.Characters.Enemies
         public void Init()
         {
             _mover.Init();
-
             _healthModel.Init(_config.MaxHealth);
             _healthPresenter.Init();
         }
