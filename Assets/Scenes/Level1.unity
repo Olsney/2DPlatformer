@@ -1416,8 +1416,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabf9c8a84127174fbabcd23b9949879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPoints: []
-  _coinPrefab: {fileID: 0}
+  _spawnPoints:
+  - {fileID: 801005606}
+  - {fileID: 1433489160}
+  - {fileID: 1064453358}
+  - {fileID: 960116946}
+  - {fileID: 1974595741}
+  - {fileID: 1493597682}
+  - {fileID: 417580463}
+  - {fileID: 172544507}
+  - {fileID: 7704001}
+  - {fileID: 853438285}
+  - {fileID: 1461232690}
+  - {fileID: 1722651488}
+  - {fileID: 871382331}
+  - {fileID: 1697645181}
+  - {fileID: 1434230533}
+  - {fileID: 1053653180}
+  - {fileID: 855412038}
+  - {fileID: 941693869}
+  - {fileID: 160193245}
+  - {fileID: 1502258944}
+  - {fileID: 513969852}
+  - {fileID: 1958257806}
+  - {fileID: 219916708}
+  - {fileID: 751658069}
+  - {fileID: 1972628582}
+  - {fileID: 1026072140}
+  - {fileID: 1221404482}
+  - {fileID: 17502595}
+  - {fileID: 1468263950}
+  - {fileID: 2018621492}
+  - {fileID: 1115779532}
+  - {fileID: 1442843605}
+  _coinPrefab: {fileID: 923161779}
 --- !u!4 &799672365 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7747360850904178581, guid: 893e9a24d63a9594992bff0febb94e31, type: 3}
@@ -1556,6 +1588,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30c94c70cacb99445a3933bb2b25ae81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &923161779 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8957199428545755190, guid: bf9a0d5fb7a8bd541bd0868eef0d6911, type: 3}
+  m_PrefabInstance: {fileID: 385183352450949656}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33375ed3964f0d548825b5bde4a2165b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &941693868
