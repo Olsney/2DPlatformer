@@ -7,14 +7,14 @@ public class DrainBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
 
-    private int _maxValue;
+    private float _maxValue;
 
     private void LateUpdate()
     {
-        transform.localRotation = Quaternion.identity;
+        transform.rotation = Quaternion.identity;
     }
 
-    public void Activate(int maxValue)
+    public void Activate(float maxValue)
     {
         gameObject.SetActive(true);
 
@@ -25,9 +25,9 @@ public class DrainBar : MonoBehaviour
     public void Disable() => 
         gameObject.SetActive(false);
 
-    public void DisplayProgress(int currentProgress)
+    public void DisplayProgress(float currentProgress)
     {
-        int changePerSecond = 1;
+        float changePerSecond = 1f;
         
         _slider.value = currentProgress;
         

@@ -60,15 +60,8 @@ namespace World.Characters.Players
             _mover.CalculateDirection();
 
             if (_inputService.IsDrainHealthUsed && _drainHealthCoroutine == null)
-            {
-                Debug.Log("Кнопка нажата и корутина не запущена");
-                
                 if (_drainHealthDetector.TryGetEnemy(out IDamageable targetToDrain))
-                {
-                    Debug.Log("получили врага для дрейна");
                     DrainHealth(targetToDrain);
-                }
-            }
 
             if (_attackDetector.TryGetEnemy(out IDamageable enemy) == false)
             {
@@ -116,9 +109,7 @@ namespace World.Characters.Players
         {
             if (_drainHealthCoroutine != null)
                 return;
-
-            Debug.Log("Запускаем корутину");
-
+            
             _drainHealthCoroutine = StartCoroutine(DrainHealthJob(enemy));
         }
 
@@ -142,8 +133,6 @@ namespace World.Characters.Players
 
             if (_healthModel.Value <= 0)
             {
-                Debug.Log("Игрок погиб");
-
                 IsDestroyed = true;
 
                 Destroy(gameObject);
@@ -155,84 +144,59 @@ namespace World.Characters.Players
         public void TakeHeal(int heal) =>
             _healthModel.TakeHeal(heal);
 
-        void OnDrawGizmos()
-        {
-            Gizmos.color = Color.black;
-            Gizmos.DrawWireSphere(transform.position, 8.5f);
-        }
-
         public IEnumerator DrainHealthJob(IDamageable enemy)
         {
-            int duration = 6;
-            int waitTime = 1;
+            float duration = 6f;
+            float waitTime = 1f;
             int drainPerIteration = 10;
             var wait = new WaitForSecondsRealtime(waitTime);
-            int castProgress = 0;
+            float castProgress = 0;
             float castRadius = 8.5f;
 
             if (_cooldownDrainHealthCoroutine != null)
-            {
-                Debug.Log("Висит кулдаун на корутине");
-                
                 yield break;
-            }
 
             _drainBar.Activate(duration);
 
-            // _drainedEnemy = enemy;
-            // _drainHealthDetector.Lost += OnDrainLost;
-
-            while (duration > 0 && enemy.IsDestroyed == false && Vector3.Distance(transform.position, enemy.Position) < castRadius)
+            while (duration > 0 && enemy.IsDestroyed == false && IsInCastRadius(enemy, castRadius))
             {
                 _drainBar.DisplayProgress(castProgress);
                 
                 duration--;
                 castProgress++;
-
-                Debug.Log("Мы запустили корутину и в цикле вайл");
-
-                // gameObject.IsDestroyed();
-                
-
-                // if (Vector3.Distance(transform.position, enemy.Position) > castRadius)
-                // {
-                //     _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
-                //     _drainHealthCoroutine = null;
-                //     
-                //     Debug.Log("Враг убежал, останавливаем корутину.");
-                //     
-                //     yield break;
-                // }
-
                 
                 enemy.TakeDamage(drainPerIteration);
                 _healthModel.TakeHeal(drainPerIteration);
                 
-                Debug.Log($"Мы нанесли и постарались поглотить {drainPerIteration}");
-
                 yield return wait;
             }
 
-            _drainBar.Disable();
             _drainHealthCoroutine = null;
             _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
-            Debug.Log("Запустили кулдаун.");
-            
         }
+        
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.black;
+            Gizmos.DrawWireSphere(transform.position, 8.5f);
+        }
+
+        private bool IsInCastRadius(IDamageable enemy, float castRadius) => 
+            Vector3.Distance(transform.position, enemy.Position) < castRadius;
 
         private IEnumerator LaunchDrainCooldown()
         {
-            int cooldown = 6;
+            float cooldown = 6f;
             float time = 1f;
 
             var wait = new WaitForSecondsRealtime(time);
             
-            _drainBar.Activate(cooldown);
-
+            _drainBar.DisplayProgress(cooldown);
+            
             while (cooldown > 0)
             {
-                _drainBar.DisplayProgress(cooldown);
                 cooldown--;
+                _drainBar.DisplayProgress(cooldown);
                 
                 yield return wait;
             }

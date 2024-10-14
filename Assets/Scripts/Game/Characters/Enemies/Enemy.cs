@@ -96,6 +96,5 @@ namespace World.Characters.Enemies
                 Destroy(gameObject);
             }
         }
-
     }
 }
