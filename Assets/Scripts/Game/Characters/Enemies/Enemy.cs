@@ -1,6 +1,7 @@
 using System.Collections;
 using Game.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using World.Characters.Enemies.Animators;
 using World.Characters.Enemies.Configs;
 using World.Characters.Enemies.Systems;
@@ -11,7 +12,7 @@ namespace World.Characters.Enemies
     public class Enemy : MonoBehaviour, IAttacker, IDamageable
     {
         [SerializeField] private PlayerFinder _playerFinder;
-        [SerializeField] private AttackAbility _attackAbility;
+        [SerializeField] private AttackAbilityFinder attackAbilityFinder;
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private EnemyConfig _config;
         [SerializeField] private EnemyMover _mover;
@@ -19,6 +20,8 @@ namespace World.Characters.Enemies
         [SerializeField] private HealthPresenter _healthPresenter;
 
         private Coroutine _currentCoroutine;
+
+        public Vector3 Position => transform.position;
 
         public void Init()
         {
@@ -31,16 +34,16 @@ namespace World.Characters.Enemies
         {
             _playerFinder.Found += _mover.MoveToPlayer;
             _playerFinder.Lost += _mover.MoveToPoint;
-            _attackAbility.Found += Attack;
-            _attackAbility.Lost += StopAttack;
+            attackAbilityFinder.Found += Attack;
+            attackAbilityFinder.Lost += StopAttack;
         }
 
         private void OnDisable()
         {
             _playerFinder.Found -= _mover.MoveToPlayer;
             _playerFinder.Lost -= _mover.MoveToPoint;
-            _attackAbility.Found -= Attack;
-            _attackAbility.Lost -= StopAttack;
+            attackAbilityFinder.Found -= Attack;
+            attackAbilityFinder.Lost -= StopAttack;
         }
     
         public void Attack(IDamageable player)
@@ -87,5 +90,6 @@ namespace World.Characters.Enemies
                 Destroy(gameObject);
             }
         }
+
     }
 }

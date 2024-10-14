@@ -1,5 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1317212089505152220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 244978585111498201}
+  - component: {fileID: 587095960115605102}
+  - component: {fileID: 6585742540213052182}
+  m_Layer: 6
+  m_Name: DrainAbilityDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &244978585111498201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317212089505152220}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5304898401917900122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &587095960115605102
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317212089505152220}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 21.471933, y: 2.9975772, z: 1}
+  m_Center: {x: 4.590969, y: 0.9737885, z: 0}
+--- !u!114 &6585742540213052182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317212089505152220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb04155fb41805341af5148fd94a217b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6224366939576744740
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,6 +107,7 @@ Transform:
   - {fileID: 1077002129979619589}
   - {fileID: 201418028512315615}
   - {fileID: 4635922183392783217}
+  - {fileID: 244978585111498201}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3621099730858231666
@@ -191,10 +258,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 9100751499283651569}
-  _enemyChecker: {fileID: 6314716740377519911}
   _config: {fileID: 11400000, guid: 01ec8baa530d3aa4da932de7af8e8f67, type: 2}
   _healthModel: {fileID: 7609171293641064557}
-  _healthPresenter: {fileID: 0}
+  _healthPresenter: {fileID: 2861155826429909820}
+  _attackDetector: {fileID: 6314716740377519911}
+  _drainHealthDetector: {fileID: 6585742540213052182}
 --- !u!114 &8984900531965678440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +319,7 @@ GameObject:
   - component: {fileID: 6314716740377519911}
   - component: {fileID: 7456584318957803172}
   m_Layer: 6
-  m_Name: EnemyChecker
+  m_Name: AttackAbilityDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,7 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94dfdec35b71d2b4b98ee6014c8ace32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxValue: 200
 --- !u!1 &8395114782171834233
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,9 +5,7 @@ using World.Characters.Players;
 
 namespace World.Characters.Enemies.Systems
 {
-    public class AttackAbility : FinderBase<IDamageable>
+    public class AttackAbilityFinder : FinderBase<IDamageable>
     {
-
-        
     }
 }

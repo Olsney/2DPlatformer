@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerFinder: {fileID: 3621777809880732310}
-  _attackAbility: {fileID: 7835584061646169972}
+  attackAbilityFinder: {fileID: 7835584061646169972}
   _animator: {fileID: 6869158181604154917}
   _config: {fileID: 11400000, guid: 021388edad168154a9b63f02f333dac7, type: 2}
   _mover: {fileID: 3184832265019676560}
@@ -318,7 +318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94dfdec35b71d2b4b98ee6014c8ace32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxValue: 0
 --- !u!114 &8931002257579666099
 MonoBehaviour:
   m_ObjectHideFlags: 0
