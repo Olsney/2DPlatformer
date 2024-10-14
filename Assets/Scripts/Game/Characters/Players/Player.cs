@@ -1,13 +1,8 @@
-using System;
 using System.Collections;
-using System.Timers;
 using Game.UI;
 using Services.InputServices;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using World.Characters.Interfaces;
 using World.Characters.Players.Animators;
 using World.Characters.Players.Configs;
@@ -109,7 +104,7 @@ namespace World.Characters.Players
         {
             if (_drainHealthCoroutine != null)
                 return;
-            
+
             _drainHealthCoroutine = StartCoroutine(DrainHealthJob(enemy));
         }
 
@@ -120,6 +115,12 @@ namespace World.Characters.Players
 
             while (enabled)
             {
+                if (_drainHealthCoroutine != null)
+                {
+                    _attackCoroutine = null;
+                    break;
+                }
+                
                 enemy.TakeDamage(_config.Damage);
                 _animator.Attack();
 
@@ -161,27 +162,27 @@ namespace World.Characters.Players
             while (duration > 0 && enemy.IsDestroyed == false && IsInCastRadius(enemy, castRadius))
             {
                 _drainBar.DisplayProgress(castProgress);
-                
+
                 duration--;
                 castProgress++;
-                
+
                 enemy.TakeDamage(drainPerIteration);
                 _healthModel.TakeHeal(drainPerIteration);
-                
+
                 yield return wait;
             }
 
-            _drainHealthCoroutine = null;
             _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
+            _drainHealthCoroutine = null;
         }
-        
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.black;
             Gizmos.DrawWireSphere(transform.position, 8.5f);
         }
 
-        private bool IsInCastRadius(IDamageable enemy, float castRadius) => 
+        private bool IsInCastRadius(IDamageable enemy, float castRadius) =>
             Vector3.Distance(transform.position, enemy.Position) < castRadius;
 
         private IEnumerator LaunchDrainCooldown()
@@ -190,14 +191,14 @@ namespace World.Characters.Players
             float time = 1f;
 
             var wait = new WaitForSecondsRealtime(time);
-            
+
             _drainBar.DisplayProgress(cooldown);
-            
+
             while (cooldown > 0)
             {
                 cooldown--;
                 _drainBar.DisplayProgress(cooldown);
-                
+
                 yield return wait;
             }
 

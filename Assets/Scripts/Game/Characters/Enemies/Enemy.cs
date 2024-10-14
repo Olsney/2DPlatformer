@@ -1,8 +1,6 @@
 using System.Collections;
 using Game.UI;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using World.Characters.Enemies.Animators;
 using World.Characters.Enemies.Configs;
 using World.Characters.Enemies.Systems;
@@ -53,10 +51,7 @@ namespace World.Characters.Enemies
         public void Attack(IDamageable player)
         {
             if (_currentCoroutine != null)
-            {
-                StopCoroutine(_currentCoroutine);
-                _currentCoroutine = null;
-            }
+                return;
         
             _currentCoroutine = StartCoroutine(AttackJob(player));
         }
