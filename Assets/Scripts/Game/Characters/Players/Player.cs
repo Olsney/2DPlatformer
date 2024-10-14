@@ -26,6 +26,7 @@ namespace World.Characters.Players
         [SerializeField] private EnemyDetector _attackDetector;
         [SerializeField] private EnemyDetector _drainHealthDetector;
         [SerializeField] private LayerMask _layerMask;
+        [SerializeField] private DrainBar _drainBar;
 
         private PlayerMover _mover;
         private Coroutine _attackCoroutine;
@@ -37,10 +38,9 @@ namespace World.Characters.Players
         private IDamageable _drainedEnemy;
 
         public Vector3 Position => transform.position;
-        public bool IsDestroyed => gameObject.IsDestroyed();
+        public bool IsDestroyed { get; private set; }
 
         public Transform Transform => transform;
-        public bool IsTransformNull => transform == null;
 
         public void Init()
         {
@@ -50,6 +50,7 @@ namespace World.Characters.Players
             _healthModel.Init(_config.MaxHealth);
             _healthPresenter.Init();
             _inputService = new StandaloneInputService();
+            _drainBar.Disable();
 
             Debug.Log(_healthModel.Value);
         }
@@ -57,10 +58,6 @@ namespace World.Characters.Players
         private void Update()
         {
             _mover.CalculateDirection();
-            
-            // var hits = Physics2D.CircleCastAll(transform.position, 8.5f, Vector3.zero, 0,_layerMask);
-            //     
-            // Debug.Log($"{hits.Length} коллайдеров");
 
             if (_inputService.IsDrainHealthUsed && _drainHealthCoroutine == null)
             {
@@ -72,18 +69,6 @@ namespace World.Characters.Players
                     DrainHealth(targetToDrain);
                 }
             }
-
-            // if (_drainHealthDetector.TryGetEnemy(out IDamageable sameTarget) == false)
-            // {
-            //     if (_drainHealthCoroutine != null)
-            //     {
-            //         StopCoroutine(_drainHealthCoroutine);
-            //         _drainHealthCoroutine = null;
-            //
-            //         if (_cooldownDrainHealthCoroutine != null)
-            //             _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
-            //     }
-            // }
 
             if (_attackDetector.TryGetEnemy(out IDamageable enemy) == false)
             {
@@ -159,6 +144,8 @@ namespace World.Characters.Players
             {
                 Debug.Log("Игрок погиб");
 
+                IsDestroyed = true;
+
                 Destroy(gameObject);
 
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -176,10 +163,11 @@ namespace World.Characters.Players
 
         public IEnumerator DrainHealthJob(IDamageable enemy)
         {
-            float duration = 6f;
-            float waitTime = 1f;
-            int drainPerIteration = 50;
+            int duration = 6;
+            int waitTime = 1;
+            int drainPerIteration = 10;
             var wait = new WaitForSecondsRealtime(waitTime);
+            int castProgress = 0;
             float castRadius = 8.5f;
 
             if (_cooldownDrainHealthCoroutine != null)
@@ -189,12 +177,17 @@ namespace World.Characters.Players
                 yield break;
             }
 
+            _drainBar.Activate(duration);
+
             // _drainedEnemy = enemy;
             // _drainHealthDetector.Lost += OnDrainLost;
 
             while (duration > 0 && enemy.IsDestroyed == false && Vector3.Distance(transform.position, enemy.Position) < castRadius)
             {
+                _drainBar.DisplayProgress(castProgress);
+                
                 duration--;
+                castProgress++;
 
                 Debug.Log("Мы запустили корутину и в цикле вайл");
 
@@ -220,30 +213,11 @@ namespace World.Characters.Players
                 yield return wait;
             }
 
+            _drainBar.Disable();
+            _drainHealthCoroutine = null;
             _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
             Debug.Log("Запустили кулдаун.");
             
-            _drainHealthCoroutine = null;
-            
-            // _drainHealthDetector.Lost -= OnDrainLost;
-            // _drainedEnemy = null;
-        }
-
-        private void OnDrainLost(Collider2D collider)
-        {
-            if (collider.TryGetComponent(out IDamageable enemy))
-            {
-                if (_drainedEnemy == enemy)
-                {
-                    StopCoroutine(_drainHealthCoroutine);
-                    _drainHealthCoroutine = null;
-                    
-                    _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
-                    _drainedEnemy = null;
-                    
-                    _drainHealthDetector.Lost -= OnDrainLost;
-                }
-            }
         }
 
         private IEnumerator LaunchDrainCooldown()
@@ -252,13 +226,18 @@ namespace World.Characters.Players
             float time = 1f;
 
             var wait = new WaitForSecondsRealtime(time);
+            
+            _drainBar.Activate(cooldown);
 
             while (cooldown > 0)
             {
+                _drainBar.DisplayProgress(cooldown);
                 cooldown--;
-
+                
                 yield return wait;
             }
+
+            _drainBar.Disable();
 
             _cooldownDrainHealthCoroutine = null;
         }
