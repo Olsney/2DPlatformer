@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1915830352410592680}
   - component: {fileID: 9204985655835234682}
   - component: {fileID: 7835584061646169972}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: AttackAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 2443799983465379794}
   - component: {fileID: 3621777809880732310}
   - component: {fileID: 4293830799038718467}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: PlayerFinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 244978585111498201}
-  - component: {fileID: 587095960115605102}
-  - component: {fileID: 6585742540213052182}
-  m_Layer: 6
-  m_Name: DrainAbilityDetector
+  - component: {fileID: 3858782613964015429}
+  - component: {fileID: 1851592771769813956}
+  m_Layer: 2
+  m_Name: DrainAbilityZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,13 +33,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5304898401917900122}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &587095960115605102
-BoxCollider:
+--- !u!61 &3858782613964015429
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317212089505152220}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -48,13 +50,35 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 21.471933, y: 2.9975772, z: 1}
-  m_Center: {x: 4.590969, y: 0.9737885, z: 0}
---- !u!114 &6585742540213052182
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.80372334, y: 0.74411297}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 14.717447, y: 2.6282258}
+  m_EdgeRadius: 0
+--- !u!114 &1851592771769813956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,7 +286,10 @@ MonoBehaviour:
   _healthModel: {fileID: 7609171293641064557}
   _healthPresenter: {fileID: 2861155826429909820}
   _attackDetector: {fileID: 6314716740377519911}
-  _drainHealthDetector: {fileID: 6585742540213052182}
+  _drainHealthDetector: {fileID: 1851592771769813956}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &8984900531965678440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,7 +424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4635922183392783217}
   - component: {fileID: 7609171293641064557}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerHealthModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
