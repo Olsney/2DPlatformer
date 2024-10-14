@@ -6,7 +6,7 @@ public class DrainBar : MonoBehaviour
     [SerializeField] private Slider _slider;
 
     private float _maxValue;
-
+    
     private void LateUpdate()
     {
         transform.rotation = Quaternion.identity;

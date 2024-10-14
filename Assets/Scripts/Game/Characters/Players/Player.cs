@@ -108,26 +108,6 @@ namespace World.Characters.Players
             _drainHealthCoroutine = StartCoroutine(DrainHealthJob(enemy));
         }
 
-        private IEnumerator AttackJob(IDamageable enemy)
-        {
-            float delay = 0.5f;
-            var wait = new WaitForSeconds(delay);
-
-            while (enabled)
-            {
-                if (_drainHealthCoroutine != null)
-                {
-                    _attackCoroutine = null;
-                    break;
-                }
-                
-                enemy.TakeDamage(_config.Damage);
-                _animator.Attack();
-
-                yield return wait;
-            }
-        }
-
         public void TakeDamage(int damage)
         {
             _healthModel.TakeDamage(damage);
@@ -174,6 +154,26 @@ namespace World.Characters.Players
 
             _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
             _drainHealthCoroutine = null;
+        }
+        
+        private IEnumerator AttackJob(IDamageable enemy)
+        {
+            float delay = 0.5f;
+            var wait = new WaitForSeconds(delay);
+
+            while (enabled)
+            {
+                if (_drainHealthCoroutine != null)
+                {
+                    _attackCoroutine = null;
+                    break;
+                }
+                
+                enemy.TakeDamage(_config.Damage);
+                _animator.Attack();
+
+                yield return wait;
+            }
         }
 
         private void OnDrawGizmos()

@@ -56,6 +56,20 @@ namespace World.Characters.Enemies
             _currentCoroutine = StartCoroutine(AttackJob(player));
         }
 
+        public void TakeDamage(int damage)
+        {
+            _healthModel.TakeDamage(damage);
+        
+            if (_healthModel.Value <= 0)
+            {
+                Debug.Log("Враг умер");
+
+                IsDestroyed = true;
+            
+                Destroy(gameObject);
+            }
+        }
+        
         private void StopAttack()
         {
             if (_currentCoroutine == null)
@@ -75,20 +89,6 @@ namespace World.Characters.Enemies
                 _animator.Attack();
             
                 yield return wait;
-            }
-        }
-
-        public void TakeDamage(int damage)
-        {
-            _healthModel.TakeDamage(damage);
-        
-            if (_healthModel.Value <= 0)
-            {
-                Debug.Log("Враг умер");
-
-                IsDestroyed = true;
-            
-                Destroy(gameObject);
             }
         }
     }
