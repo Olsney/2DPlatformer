@@ -7,5 +7,6 @@ namespace World.Characters.Interfaces
         void TakeDamage(int damage);
 
         Vector3 Position { get; }
+        bool IsDestroyed { get; }
     }
 }

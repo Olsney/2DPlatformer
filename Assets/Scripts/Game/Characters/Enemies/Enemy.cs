@@ -1,5 +1,6 @@
 using System.Collections;
 using Game.UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using World.Characters.Enemies.Animators;
@@ -22,6 +23,9 @@ namespace World.Characters.Enemies
         private Coroutine _currentCoroutine;
 
         public Vector3 Position => transform.position;
+        public bool IsDestroyed { get; private set; }
+
+        public bool IsTransformNull => transform == null;
 
         public void Init()
         {
@@ -86,6 +90,8 @@ namespace World.Characters.Enemies
             if (_healthModel.Value <= 0)
             {
                 Debug.Log("Враг умер");
+
+                IsDestroyed = true;
             
                 Destroy(gameObject);
             }

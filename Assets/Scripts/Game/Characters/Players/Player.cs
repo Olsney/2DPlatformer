@@ -3,6 +3,7 @@ using System.Collections;
 using System.Timers;
 using Game.UI;
 using Services.InputServices;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -36,8 +37,10 @@ namespace World.Characters.Players
         private IDamageable _drainedEnemy;
 
         public Vector3 Position => transform.position;
+        public bool IsDestroyed => gameObject.IsDestroyed();
 
         public Transform Transform => transform;
+        public bool IsTransformNull => transform == null;
 
         public void Init()
         {
@@ -175,7 +178,7 @@ namespace World.Characters.Players
         {
             float duration = 6f;
             float waitTime = 1f;
-            int drainPerIteration = 10;
+            int drainPerIteration = 50;
             var wait = new WaitForSecondsRealtime(waitTime);
             float castRadius = 8.5f;
 
@@ -189,33 +192,26 @@ namespace World.Characters.Players
             // _drainedEnemy = enemy;
             // _drainHealthDetector.Lost += OnDrainLost;
 
-            while (duration > 0)
+            while (duration > 0 && enemy.IsDestroyed == false && Vector3.Distance(transform.position, enemy.Position) < castRadius)
             {
-                if (enemy == null)
-                {
-                    _drainHealthCoroutine = null;
-                    _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
-
-                    Debug.Log("Враг NULL из-за смерти, останавливаем корутину.");
-
-                    yield break;
-                }
-                
                 duration--;
 
                 Debug.Log("Мы запустили корутину и в цикле вайл");
+
+                // gameObject.IsDestroyed();
                 
 
-                if (Vector3.Distance(transform.position, enemy.Position) > castRadius)
-                {
-                    _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
-                    _drainHealthCoroutine = null;
-                    
-                    Debug.Log("Враг убежал, останавливаем корутину.");
-                    
-                    yield break;
-                }
+                // if (Vector3.Distance(transform.position, enemy.Position) > castRadius)
+                // {
+                //     _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
+                //     _drainHealthCoroutine = null;
+                //     
+                //     Debug.Log("Враг убежал, останавливаем корутину.");
+                //     
+                //     yield break;
+                // }
 
+                
                 enemy.TakeDamage(drainPerIteration);
                 _healthModel.TakeHeal(drainPerIteration);
                 
