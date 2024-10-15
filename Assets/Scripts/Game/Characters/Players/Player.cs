@@ -131,7 +131,7 @@ namespace World.Characters.Players
             float waitTime = 1f;
             int drainPerIteration = 10;
             var wait = new WaitForSecondsRealtime(waitTime);
-            float castProgress = 0;
+            float castProgress = 6;
             float castRadius = 8.5f;
 
             if (_cooldownDrainHealthCoroutine != null)
@@ -143,8 +143,8 @@ namespace World.Characters.Players
             {
                 _drainBar.DisplayProgress(castProgress);
 
+                castProgress--;
                 duration--;
-                castProgress++;
 
                 enemy.TakeDamage(drainPerIteration);
                 _healthModel.TakeHeal(drainPerIteration);
@@ -187,17 +187,18 @@ namespace World.Characters.Players
 
         private IEnumerator LaunchDrainCooldown()
         {
+            float recoveryProgress = 0;
             float cooldown = 6f;
             float time = 1f;
 
             var wait = new WaitForSecondsRealtime(time);
 
-            _drainBar.DisplayProgress(cooldown);
+            _drainBar.DisplayProgress(recoveryProgress);
 
-            while (cooldown > 0)
+            while (recoveryProgress <= cooldown)
             {
-                cooldown--;
-                _drainBar.DisplayProgress(cooldown);
+                _drainBar.DisplayProgress(recoveryProgress);
+                recoveryProgress++;
 
                 yield return wait;
             }
