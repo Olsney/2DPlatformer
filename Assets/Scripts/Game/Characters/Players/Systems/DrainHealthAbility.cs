@@ -56,12 +56,10 @@ namespace World.Characters.Players.Systems
             if (_cooldownDrainHealthCoroutine != null)
                 yield break;
 
-            // _drainBar.Activate(duration);
             SkillActivated?.Invoke(duration);
 
             while (duration > 0 && enemy.IsDestroyed == false && IsInCastRadius(enemy, castRadius))
             {
-                // _drainBar.DisplayProgress(castProgress);
                 ProgressChanged?.Invoke(castProgress);
 
                 castProgress--;
@@ -88,12 +86,10 @@ namespace World.Characters.Players.Systems
 
             var wait = new WaitForSecondsRealtime(time);
 
-            // _drainBar.DisplayProgress(recoveryProgress);
             ProgressChanged?.Invoke(recoveryProgress);
 
             while (recoveryProgress <= cooldown)
             {
-                // _drainBar.DisplayProgress(recoveryProgress);
                 ProgressChanged?.Invoke(recoveryProgress);
                 recoveryProgress++;
 

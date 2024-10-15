@@ -1,7 +1,6 @@
 using System.Collections;
 using Game.UI;
 using Services.InputServices;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using World.Characters.Interfaces;
