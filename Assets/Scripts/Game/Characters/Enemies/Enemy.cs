@@ -51,7 +51,10 @@ namespace World.Characters.Enemies
         public void Attack(IDamageable player)
         {
             if (_currentCoroutine != null)
-                return;
+            {
+                StopCoroutine(_currentCoroutine);
+                _currentCoroutine = null;
+            }
         
             _currentCoroutine = StartCoroutine(AttackJob(player));
         }
