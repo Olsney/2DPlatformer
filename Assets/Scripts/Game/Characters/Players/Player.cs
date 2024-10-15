@@ -1,6 +1,7 @@
 using System.Collections;
 using Game.UI;
 using Services.InputServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using World.Characters.Interfaces;
@@ -21,42 +22,26 @@ namespace World.Characters.Players
         [SerializeField] private EnemyDetector _attackDetector;
         [SerializeField] private EnemyDetector _drainHealthDetector;
         [SerializeField] private LayerMask _layerMask;
-        [SerializeField] private DrainBar _drainBar;
-
+        [SerializeField] private DrainHealthAbility _drainHealthAbility;
+        
         private PlayerMover _mover;
         private Coroutine _attackCoroutine;
         private Rigidbody2D _rigidbody;
         private IInputService _inputService;
 
-        private Coroutine _drainHealthCoroutine;
-        private Coroutine _cooldownDrainHealthCoroutine;
-        private IDamageable _drainedEnemy;
-
         public Vector3 Position => transform.position;
+        public int Health => _healthModel.Value;
         public bool IsDestroyed { get; private set; }
 
         public Transform Transform => transform;
-
-        public void Init()
-        {
-            _mover = GetComponent<PlayerMover>();
-            _rigidbody = GetComponent<Rigidbody2D>();
-            _mover.Init(_rigidbody);
-            _healthModel.Init(_config.MaxHealth);
-            _healthPresenter.Init();
-            _inputService = new StandaloneInputService();
-            _drainBar.Disable();
-
-            Debug.Log(_healthModel.Value);
-        }
 
         private void Update()
         {
             _mover.CalculateDirection();
 
-            if (_inputService.IsDrainHealthUsed && _drainHealthCoroutine == null)
+            if (_inputService.IsDrainHealthUsed && _drainHealthAbility.IsDraining == false)
                 if (_drainHealthDetector.TryGetEnemy(out IDamageable targetToDrain))
-                    DrainHealth(targetToDrain);
+                    _drainHealthAbility.DrainHealth(targetToDrain);
 
             if (_attackDetector.TryGetEnemy(out IDamageable enemy) == false)
             {
@@ -88,24 +73,27 @@ namespace World.Characters.Players
                 Destroy(healingKit.gameObject);
             }
         }
+        
+        public void Init()
+        {
+            _mover = GetComponent<PlayerMover>();
+            _rigidbody = GetComponent<Rigidbody2D>();
+            _mover.Init(_rigidbody);
+            _healthModel.Init(_config.MaxHealth);
+            _healthPresenter.Init();
+            _inputService = new StandaloneInputService();
+            _drainHealthAbility.Init();
+        }
 
         public void Attack(IDamageable enemy)
         {
             if (_attackCoroutine != null)
                 return;
 
-            if (_drainHealthCoroutine != null)
+            if (_drainHealthAbility.IsDraining)
                 return;
 
             _attackCoroutine = StartCoroutine(AttackJob(enemy));
-        }
-
-        public void DrainHealth(IDamageable enemy)
-        {
-            if (_drainHealthCoroutine != null)
-                return;
-
-            _drainHealthCoroutine = StartCoroutine(DrainHealthJob(enemy));
         }
 
         public void TakeDamage(int damage)
@@ -124,37 +112,6 @@ namespace World.Characters.Players
 
         public void TakeHeal(int heal) =>
             _healthModel.TakeHeal(heal);
-
-        public IEnumerator DrainHealthJob(IDamageable enemy)
-        {
-            float duration = 6f;
-            float waitTime = 1f;
-            int drainPerIteration = 10;
-            var wait = new WaitForSecondsRealtime(waitTime);
-            float castProgress = 6;
-            float castRadius = 8.5f;
-
-            if (_cooldownDrainHealthCoroutine != null)
-                yield break;
-
-            _drainBar.Activate(duration);
-
-            while (duration > 0 && enemy.IsDestroyed == false && IsInCastRadius(enemy, castRadius))
-            {
-                _drainBar.DisplayProgress(castProgress);
-
-                castProgress--;
-                duration--;
-
-                enemy.TakeDamage(drainPerIteration);
-                _healthModel.TakeHeal(drainPerIteration);
-
-                yield return wait;
-            }
-
-            _cooldownDrainHealthCoroutine = StartCoroutine(LaunchDrainCooldown());
-            _drainHealthCoroutine = null;
-        }
         
         private IEnumerator AttackJob(IDamageable enemy)
         {
@@ -163,7 +120,7 @@ namespace World.Characters.Players
 
             while (enabled)
             {
-                if (_drainHealthCoroutine != null)
+                if (_drainHealthAbility.IsDraining)
                 {
                     _attackCoroutine = null;
                     break;
@@ -180,32 +137,6 @@ namespace World.Characters.Players
         {
             Gizmos.color = Color.black;
             Gizmos.DrawWireSphere(transform.position, 8.5f);
-        }
-
-        private bool IsInCastRadius(IDamageable enemy, float castRadius) =>
-            Vector3.Distance(transform.position, enemy.Position) < castRadius;
-
-        private IEnumerator LaunchDrainCooldown()
-        {
-            float recoveryProgress = 0;
-            float cooldown = 6f;
-            float time = 1f;
-
-            var wait = new WaitForSecondsRealtime(time);
-
-            _drainBar.DisplayProgress(recoveryProgress);
-
-            while (recoveryProgress <= cooldown)
-            {
-                _drainBar.DisplayProgress(recoveryProgress);
-                recoveryProgress++;
-
-                yield return wait;
-            }
-
-            _drainBar.Disable();
-
-            _cooldownDrainHealthCoroutine = null;
         }
     }
 }

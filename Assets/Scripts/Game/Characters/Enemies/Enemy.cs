@@ -21,17 +21,9 @@ namespace World.Characters.Enemies
         private Coroutine _currentCoroutine;
 
         public Vector3 Position => transform.position;
+        public int Health => _healthModel.Value;
         public bool IsDestroyed { get; private set; }
-
-        public bool IsTransformNull => transform == null;
-
-        public void Init()
-        {
-            _mover.Init();
-            _healthModel.Init(_config.MaxHealth);
-            _healthPresenter.Init();
-            _mover.MoveToPoint();
-        }
+        
         private void OnEnable()
         {
             _playerFinder.Found += _mover.MoveToPlayer;
@@ -46,6 +38,14 @@ namespace World.Characters.Enemies
             _playerFinder.Lost -= _mover.MoveToPoint;
             attackAbilityFinder.Found -= Attack;
             attackAbilityFinder.Lost -= StopAttack;
+        }
+        
+        public void Init()
+        {
+            _mover.Init();
+            _healthModel.Init(_config.MaxHealth);
+            _healthPresenter.Init();
+            _mover.MoveToPoint();
         }
     
         public void Attack(IDamageable player)

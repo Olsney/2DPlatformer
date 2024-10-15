@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game.UI
 {
@@ -17,21 +18,16 @@ namespace Game.UI
             _healthModel.Changed -= OnChanged;
         }
 
-
         public void Init()
         {
-            foreach (var healthView in _healthView)
-            {
+            foreach (var healthView in _healthView) 
                 healthView.SetHealthInfo(_healthModel.MaxValue, _healthModel.Value);
-            }
         }
 
         private void OnChanged()
         {
-            foreach (var healthView in _healthView)
-            {
+            foreach (var healthView in _healthView) 
                 healthView.SetCurrentHealth(_healthModel.Value);
-            }
         }
     }
 }

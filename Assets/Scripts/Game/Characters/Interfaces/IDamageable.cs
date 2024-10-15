@@ -8,5 +8,7 @@ namespace World.Characters.Interfaces
 
         Vector3 Position { get; }
         bool IsDestroyed { get; }
+        
+        int Health { get; }
     }
 }
