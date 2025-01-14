@@ -4,5 +4,6 @@
     {
         float DirectionX { get; }
         bool IsJumping { get; }
+        bool IsDrainHealthUsed { get; }
     }
 }

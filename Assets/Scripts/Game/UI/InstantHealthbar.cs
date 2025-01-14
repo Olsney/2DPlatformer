@@ -9,7 +9,7 @@ public class InstantHealthbar : HealthViewBase
     
     private int _maxHealth;
 
-    public void LateUpdate()
+    private void LateUpdate()
     {
         _transform.rotation = Quaternion.identity;
     }

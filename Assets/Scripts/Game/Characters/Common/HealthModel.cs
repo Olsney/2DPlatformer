@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class HealthModel : MonoBehaviour
 {
-    [SerializeField] private int _maxValue;
+    private int _maxValue;
     
     public event Action Changed;
     

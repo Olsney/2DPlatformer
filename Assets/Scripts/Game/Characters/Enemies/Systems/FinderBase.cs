@@ -1,25 +1,24 @@
-using System;
+﻿using System;
 using UnityEngine;
-using World.Characters.Players;
 
 namespace World.Characters.Enemies.Systems
 {
-    public class AttackAbility : MonoBehaviour
+    public class FinderBase<T> : MonoBehaviour 
     {
-        public event Action<Player> Founded;
+        public event Action<T> Found;
         public event Action Lost;
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.TryGetComponent(out Player player))
+            if (collider.TryGetComponent(out T component))
             {
-                Founded?.Invoke(player);
+                Found?.Invoke(component);
             }
         }
 
         private void OnTriggerExit2D(Collider2D collider)
         {
-            if (collider.TryGetComponent(out Player _))
+            if (collider.TryGetComponent(out T _))
             {
                 Lost?.Invoke();
             }

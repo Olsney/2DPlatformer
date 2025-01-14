@@ -2,7 +2,7 @@ using World.Characters.Interfaces;
 
 namespace World.Characters.Enemies.Systems
 {
-    public class PlayerFinder : FinderBase<IEnemyTarget>
+    public class AttackAbilityFinder : FinderBase<IDamageable>
     {
     }
 }
